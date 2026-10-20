@@ -1,0 +1,6 @@
+{
+  "name": "entre-nos-browser-tests",
+  "private": true,
+  "scripts": { "test": "node browser.cjs" },
+  "devDependencies": { "playwright": "1.57.0" }
+}

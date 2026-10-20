@@ -1,0 +1,445 @@
+CREATE ROLE
+CREATE ROLE
+CREATE SCHEMA
+CREATE SCHEMA
+CREATE TABLE
+CREATE FUNCTION
+GRANT
+GRANT
+CREATE TABLE
+CREATE TABLE
+ALTER TABLE
+GRANT
+CREATE SCHEMA
+GRANT
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+GRANT
+BEGIN
+CREATE SCHEMA
+REVOKE
+GRANT
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE FUNCTION
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+DROP TRIGGER
+NOTICE:  trigger "diary_profile_guard" for relation "public.profiles" does not exist, skipping
+CREATE TRIGGER
+CREATE FUNCTION
+REVOKE
+NOTICE:  trigger "diary_new_user" for relation "auth.users" does not exist, skipping
+DROP TRIGGER
+CREATE TRIGGER
+INSERT 0 0
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+REVOKE
+GRANT
+GRANT
+GRANT
+NOTICE:  policy "diary_profiles_read" for relation "public.profiles" does not exist, skipping
+DROP POLICY
+CREATE POLICY
+DROP POLICY
+NOTICE:  policy "diary_profiles_update" for relation "public.profiles" does not exist, skipping
+CREATE POLICY
+DROP POLICY
+NOTICE:  policy "diary_posts_read" for relation "public.posts" does not exist, skipping
+CREATE POLICY
+NOTICE:  policy "diary_posts_delete" for relation "public.posts" does not exist, skipping
+DROP POLICY
+CREATE POLICY
+DROP POLICY
+NOTICE:  policy "diary_photos_read" for relation "public.post_photos" does not exist, skipping
+CREATE POLICY
+INSERT 0 3
+DROP POLICY
+NOTICE:  policy "diary_media_read" for relation "storage.objects" does not exist, skipping
+CREATE POLICY
+DROP POLICY
+NOTICE:  policy "diary_media_upload" for relation "storage.objects" does not exist, skipping
+CREATE POLICY
+NOTICE:  policy "diary_media_delete" for relation "storage.objects" does not exist, skipping
+DROP POLICY
+CREATE POLICY
+CREATE FUNCTION
+REVOKE
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+REVOKE
+GRANT
+COMMIT
+BEGIN
+NOTICE:  schema "private" already exists, skipping
+CREATE SCHEMA
+REVOKE
+GRANT
+NOTICE:  relation "profiles" already exists, skipping
+CREATE TABLE
+NOTICE:  relation "posts" already exists, skipping
+CREATE TABLE
+CREATE TABLE
+NOTICE:  relation "post_photos" already exists, skipping
+NOTICE:  relation "posts_recent_idx" already exists, skipping
+CREATE INDEX
+NOTICE:  relation "photos_post_idx" already exists, skipping
+CREATE INDEX
+CREATE INDEX
+NOTICE:  relation "profiles_status_idx" already exists, skipping
+CREATE FUNCTION
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+DROP TRIGGER
+CREATE TRIGGER
+CREATE FUNCTION
+REVOKE
+DROP TRIGGER
+CREATE TRIGGER
+INSERT 0 0
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+REVOKE
+GRANT
+GRANT
+GRANT
+DROP POLICY
+CREATE POLICY
+DROP POLICY
+CREATE POLICY
+DROP POLICY
+CREATE POLICY
+DROP POLICY
+CREATE POLICY
+DROP POLICY
+CREATE POLICY
+INSERT 0 3
+DROP POLICY
+CREATE POLICY
+DROP POLICY
+CREATE POLICY
+DROP POLICY
+CREATE POLICY
+CREATE FUNCTION
+REVOKE
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+REVOKE
+GRANT
+COMMIT
+PASS: bootstrap exige substituir o e-mail de exemplo
+PASS: bootstrap rejeita usuário inexistente
+PASS: bootstrap rejeita e-mail não confirmado
+NOTICE:  Administrador criado para o usuário 50000000-0000-4000-8000-000000000001.
+PASS: bootstrap promove exatamente a conta confirmada
+PASS: bootstrap não cria outro administrador se já existir um
+INSERT 0 4
+ ok 
+----
+ 
+(1 row)
+
+NOTICE:  PASS: Metadados do cadastro não promovem usuário
+UPDATE 1
+SET
+SET
+ denied 
+--------
+ 
+(1 row)
+
+NOTICE:  PASS: Usuário não consegue se aprovar
+NOTICE:  PASS: Usuário não consegue virar administrador
+ denied 
+--------
+ 
+(1 row)
+
+NOTICE:  PASS: Usuário comum não chama aprovação
+ denied 
+--------
+ 
+(1 row)
+
+ denied 
+--------
+ 
+(1 row)
+
+NOTICE:  PASS: Pendente não publica
+NOTICE:  PASS: Pendente não envia foto
+ denied 
+--------
+ 
+(1 row)
+
+SET
+ admin_set_member 
+------------------
+ 
+(1 row)
+
+ admin_set_member 
+------------------
+ 
+(1 row)
+
+ ok 
+----
+ 
+(1 row)
+
+NOTICE:  PASS: Administrador aprova membros
+NOTICE:  PASS: RPC não suspende administradores
+ invalid 
+---------
+ 
+(1 row)
+
+SET
+NOTICE:  PASS: Publicação vazia é rejeitada
+ invalid 
+---------
+ 
+(1 row)
+
+ ok 
+----
+ 
+(1 row)
+
+NOTICE:  PASS: Publicação inválida não deixa registro
+INSERT 0 2
+NOTICE:  PASS: Autor consegue acessar upload ainda não publicado
+ ok 
+----
+ 
+(1 row)
+
+ denied 
+--------
+ 
+(1 row)
+
+NOTICE:  PASS: Upload em pasta de outra pessoa é bloqueado
+NOTICE:  PASS: Originais não podem ser sobrescritos
+ ok 
+----
+ 
+(1 row)
+
+SET
+ ok 
+----
+ 
+(1 row)
+
+NOTICE:  PASS: Outro membro não lê uploads não publicados
+SET
+NOTICE:  PASS: Foto com tamanho forjado é rejeitada
+ invalid 
+---------
+ 
+(1 row)
+
+             publish_post             
+--------------------------------------
+ 30000000-0000-4000-8000-000000000001
+(1 row)
+
+ ok 
+----
+ 
+(1 row)
+
+NOTICE:  PASS: Publicação apenas com foto funciona
+             publish_post             
+--------------------------------------
+ 30000000-0000-4000-8000-000000000002
+(1 row)
+
+NOTICE:  PASS: Publicação apenas com texto funciona
+ ok 
+----
+ 
+(1 row)
+
+              edit_post               
+--------------------------------------
+ 30000000-0000-4000-8000-000000000002
+(1 row)
+
+NOTICE:  PASS: Autor edita sua publicação
+ ok 
+----
+ 
+(1 row)
+
+NOTICE:  PASS: Edição não permite remover o último conteúdo
+ invalid 
+---------
+ 
+(1 row)
+
+SET
+ ok 
+----
+ 
+(1 row)
+
+NOTICE:  PASS: Segundo membro lê feed e fotos de outro autor
+ ok 
+----
+ 
+(1 row)
+
+NOTICE:  PASS: Segundo membro tem acesso privado ao original para download
+NOTICE:  PASS: Segundo membro não edita publicação alheia
+ denied 
+--------
+ 
+(1 row)
+
+NOTICE:  PASS: Inserção direta não contorna a RPC
+ denied 
+--------
+ 
+(1 row)
+
+             publish_post             
+--------------------------------------
+ 30000000-0000-4000-8000-000000000003
+(1 row)
+
+ ok 
+----
+ 
+(1 row)
+
+NOTICE:  PASS: Segundo membro também publica
+              edit_post               
+--------------------------------------
+ 30000000-0000-4000-8000-000000000003
+(1 row)
+
+NOTICE:  PASS: Segundo membro edita e exclui sua publicação
+ ok 
+----
+ 
+(1 row)
+
+ ok 
+----
+ 
+(1 row)
+
+NOTICE:  PASS: Segundo membro não exclui publicação alheia
+ ok 
+----
+ 
+(1 row)
+
+NOTICE:  PASS: Segundo membro não exclui original alheio
+ ok 
+----
+ 
+(1 row)
+
+NOTICE:  PASS: Perfil alheio não pode ser editado
+SET
+NOTICE:  PASS: Pendente não lê feed nem fotos nem originais
+ ok 
+----
+ 
+(1 row)
+
+NOTICE:  PASS: Pendente só vê próprio perfil
+ ok 
+----
+ 
+(1 row)
+
+SET
+ admin_set_member 
+------------------
+ 
+(1 row)
+
+SET
+ ok 
+----
+ 
+(1 row)
+
+NOTICE:  PASS: Sessão existente perde feed e downloads imediatamente após suspensão
+ denied 
+--------
+ 
+(1 row)
+
+NOTICE:  PASS: Suspenso não publica
+RESET
+SET
+SET
+ denied 
+--------
+ 
+(1 row)
+
+NOTICE:  PASS: Anônimo não lê registros
+NOTICE:  PASS: Anônimo não lê objetos para download
+ ok 
+----
+ 
+(1 row)
+
+NOTICE:  PASS: Anônimo não executa RPC de publicação
+ denied 
+--------
+ 
+(1 row)
+
+RESET
+SET
+SET
+NOTICE:  PASS: Administrador remove original de outro autor
+ ok 
+----
+ 
+(1 row)
+
+NOTICE:  PASS: Administrador remove publicação de outro autor
+ ok 
+----
+ 
+(1 row)
+
+NOTICE:  PASS: Remover publicação remove metadados das fotos
+ ok 
+----
+ 
+(1 row)
+
+SET
+NOTICE:  PASS: Autor limpa miniatura órfã depois da exclusão
+ ok 
+----
+ 
+(1 row)
+
+RESET
+PASS: políticas/RPCs testadas em PostgreSQL 17 local; não é teste do Auth/Storage HTTP do Supabase.

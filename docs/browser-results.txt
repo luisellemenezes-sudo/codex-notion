@@ -1,0 +1,40 @@
+Browser integration — HTTP Supabase SIMULADO; sem projeto ou e-mails reais.
+Data UTC: 2026-10-20T13:43:29.230Z
+PASS 01 Configuração ausente exibe instruções e não abre conteúdo
+PASS 02 Login desktop sem rolagem horizontal
+PASS 03 Cadastro envia nome e mantém aviso de confirmação/aprovação
+PASS 04 Recuperação de senha solicita e-mail com URL da subpasta
+PASS 05 Cadastro pendente fica fora do feed
+PASS 06 Administrador aprova cadastro pendente
+PASS 07 Membro aprovado vê postagem de amigo e não recebe ações de edição/administração
+PASS 08 Download de foto de outro autor preserva cada byte e nome original
+PASS 09 ZIP reúne todos os originais e preserva bytes com nomes duplicados distintos
+PASS 10 Visualização ampliada abre original e permite download intacto com ação de salvar acessível
+PASS 11 Falha de download mostra mensagem e remove arquivo anterior
+PASS 12 Publicação apenas texto salva e renderiza HTML como texto inerte
+PASS 13 Autor edita o próprio texto
+PASS 14 Seleção pelo dispositivo mostra prévia antes de publicar
+PASS 15 Publicação apenas foto envia original intacto e miniatura JPEG separada
+PASS 16 Edição mantém fotos anteriores e adiciona texto com outra foto
+PASS 17 Cancelar confirmação preserva publicação
+PASS 18 Exclusão confirmada remove registro e objetos enviados
+PASS 19 Publicação vazia é recusada com mensagem
+PASS 20 Arquivo com assinatura incompatível é recusado
+PASS 21 Nome do perfil é salvo online e atualizado na interface
+PASS 22 Foto de perfil vira JPEG de 512px e é salva em bucket privado
+PASS 23 Feed desktop sem rolagem horizontal
+PASS 24 Sair limpa o conteúdo privado da tela
+PASS 25 Segundo membro tem edição própria e não edita publicação de Alice
+PASS 26 Administrador suspende membro com confirmação
+PASS 27 Administrador remove publicação de outra pessoa
+PASS 28 Membro suspenso não acessa o diário após login
+PASS 29 Login celular sem rolagem horizontal
+PASS 30 Feed celular sem rolagem horizontal
+PASS 31 Download original funciona no viewport celular Chromium
+PASS 32 Compositor celular sem rolagem horizontal
+PASS 33 Mesmos arquivos funcionam na raiz e na subpasta /blog/
+PASS 34 Callback de recuperação abre formulário e atualiza senha via Auth
+PASS 35 Erro de consulta do feed permanece visível para o usuário
+PASS 36 Nenhum erro JavaScript não tratado nos cenários executados
+TOTAL: 36 verificações passaram.
+Limites: HTTP de Supabase simulado, sem confirmação SMTP real, sem Safari/iOS real, sem RLS HTTP real (ver testes PostgreSQL separados).

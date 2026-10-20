@@ -1,0 +1,5 @@
+entrega/*
+!entrega/entre-nos.zip
+node_modules/
+tests/node_modules/
+__pycache__/
